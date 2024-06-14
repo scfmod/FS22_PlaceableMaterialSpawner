@@ -57,6 +57,15 @@ function MaterialSpawnerActivatable:run()
     g_materialSpawnerDialog:show(self.placeable)
 end
 
+---@return boolean
+function MaterialSpawnerActivatable:getIsActivatable()
+    if g_currentMission.missionDynamicInfo.isMultiplayer then
+        return g_currentMission.isMasterUser
+    end
+
+    return true
+end
+
 ---@param x number
 ---@param y number
 ---@param z number
