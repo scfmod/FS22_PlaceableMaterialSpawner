@@ -16,7 +16,6 @@
     <placeableTypes>
         <!-- Extend parent type, can be anything -->
         <type name="mineShaft" parent="simplePlaceable" filename="$dataS/scripts/placeables/Placeable.lua">
-            <!-- Add construction as last entry to type -->
             <specialization name="FS22_1_PlaceableMaterialSpawner.materialSpawner" />
         </type>
     </placeableTypes>
