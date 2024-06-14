@@ -137,14 +137,16 @@ function MaterialSpawnerArea:load(xmlFile, path)
         table.insert(self.fillTypes, g_fillTypeManager:getFillTypeByName('STONE'))
     end
 
-    self.samples = {
-        work = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'work', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable),
-        work2 = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'work2', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable),
-        dropping = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'dropping', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable)
-    }
+    if self.isClient then
+        self.samples = {
+            work = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'work', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable),
+            work2 = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'work2', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable),
+            dropping = g_soundManager:loadSampleFromXML(xmlFile, path .. '.sounds', 'dropping', self.placeable.baseDirectory, self.placeable.components, 1, AudioGroup.ENVIRONMENT, self.placeable.i3dMappings, self.placeable)
+        }
 
-    self.animationNodes = g_animationManager:loadAnimations(xmlFile, path .. '.animationNodes', self.placeable.components, self.placeable, self.placeable.i3dMappings)
-    self.effects = g_effectManager:loadEffect(xmlFile, path .. '.effectNodes', self.placeable.components, self.placeable, self.placeable.i3dMappings)
+        self.animationNodes = g_animationManager:loadAnimations(xmlFile, path .. '.animationNodes', self.placeable.components, self.placeable, self.placeable.i3dMappings)
+        self.effects = g_effectManager:loadEffect(xmlFile, path .. '.effectNodes', self.placeable.components, self.placeable, self.placeable.i3dMappings)
+    end
 
     self:setFillType(self.fillTypes[1])
 end
@@ -205,26 +207,6 @@ function MaterialSpawnerArea:setFillTypeIndex(fillTypeIndex)
         self:setFillType(fillType)
     end
 end
-
--- ---@param fillTypeIndex number
--- function MaterialSpawnerArea:setFillTypeIndex(fillTypeIndex)
---     if self.fillTypeIndex ~= fillTypeIndex then
---         Logging.info('MaterialSpawnerArea:setFillTypeIndex() %s', tostring(fillTypeIndex))
-
---         if self.isServer then
---             local event = SetMaterialSpawnerAreaFilltypeEvent.new(self.placeable, self.index, fillTypeIndex)
---             g_server:broadcastEvent(event)
---         end
-
---         self.fillTypeIndex = fillTypeIndex
-
---         if self.isClient then
---             g_effectManager:setFillType(self.effects, self.fillTypeIndex)
---         end
-
---         g_messageCenter:publish(MessageType.MATERIAL_SPAWNER_AREA_CHANGED, self)
---     end
--- end
 
 ---@param fillType FillTypeObject
 ---@return boolean
