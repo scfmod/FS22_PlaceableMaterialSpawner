@@ -321,7 +321,14 @@ end
 function MaterialSpawnerArea:writeStream(streamId, connection)
     streamWriteBool(streamId, self.enabled)
     streamWriteUIntN(streamId, self.state, MaterialSpawnerArea.SEND_NUM_BITS_STATE)
-    streamWriteUIntN(streamId, self.currentFillType.index, FillTypeManager.SEND_NUM_BITS)
+
+    local fillTypeIndex = FillType.UNKNOWN
+
+    if self.currentFillType ~= nil then
+        fillTypeIndex = self.currentFillType.index
+    end
+
+    streamWriteUIntN(streamId, fillTypeIndex, FillTypeManager.SEND_NUM_BITS)
 end
 
 ---@param streamId number
