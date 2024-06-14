@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <!-- Optional for enabling access to control panel GUI -->
+        <activationTrigger node="playerActivationTrigger" />
+
+        <spawnAreas>
+            <spawnArea>
+                <name>Iron ore</name>
+                <litersPerHour>3200</litersPerHour>
+                <fillTypes>IRONORE</fillTypes>
+                <area startNode=".." widthNode=".." heightNode=".." />
+
+                <!-- optional -->
+                <effectNodes>
+                    <effecNode />
+                </effectNodes>
+
+                <!-- optional -->
+                <animationNodes>
+                    <animationNode />
+                </animationNodes>
+
+                <!-- optional -->
+                <sounds>
+                </sounds>
+            </spawnArea>
+
+            <spawnArea>
+                <name>Discarded material</name>
+                <litersPerHour>2000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+                <area startNode=".." widthNode=".." heightNode=".." />
+
+                <!-- optional -->
+                <effectNodes>
+                    <effecNode />
+                </effectNodes>
+
+                <!-- optional -->
+                <animationNodes>
+                    <animationNode />
+                </animationNodes>
+
+                <!-- optional -->
+                <sounds>
+                </sounds>
+            </spawnArea>
+
+            <spawnArea defaultEnabled="false">
+                <name>Rare earth materials</name>
+                <litersPerHour>100</litersPerHour>
+                <fillTypes>LITHIUMORE</fillTypes>
+
+                <!-- optional -->
+                <effectNodes>
+                    <effecNode />
+                </effectNodes>
+
+                <!-- optional -->
+                <animationNodes>
+                    <animationNode />
+                </animationNodes>
+
+                <!-- optional -->
+                <sounds>
+                </sounds>
+            </spawnArea>
+        </spawnAreas>
+
+    </materialSpawner>
+</placeable>

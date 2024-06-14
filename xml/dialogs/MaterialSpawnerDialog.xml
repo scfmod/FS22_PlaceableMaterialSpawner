@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement type="empty" profile="newLayer" />
+    <GuiElement type="bitmap" profile="mSpawner_dialogFullscreenBackground" />
+    <GuiElement type="bitmap" profile="bgVignette" />
+    <GuiElement type="bitmap" profile="bgGlowDialog" />
+
+    <GuiElement type="bitmap" id="dialogElement" profile="mSpawner_panelDialog">
+        <GuiElement type="bitmap" profile="mSpawner_areaDialogStripesBarLeft" />
+        <GuiElement type="bitmap" profile="mSpawner_areaDialogStripesBarRight" />
+
+        <GuiElement type="empty" profile="mSpawner_dialogHeader">
+            <GuiElement type="text" profile="mSpawner_dialogHeaderTitle" text="$l10n_ui_materialSpawnerDialogTitle" />
+        </GuiElement>
+
+        <GuiElement type="bitmap" profile="mSpawner_panelDialogContent">
+            <GuiElement type="bitmap" profile="mSpawner_areaDialogTopShadow" />
+            <GuiElement type="bitmap" profile="mSpawner_areaDialogBottomShadow" />
+
+            <GuiElement type="bitmap" profile="mSpawner_panelDialogListHeader">
+                <GuiElement type="text" profile="mSpawner_panelDialogListHeaderName" text="$l10n_ui_headerName" />
+                <GuiElement type="text" profile="mSpawner_panelDialogListHeaderFillType" text="$l10n_ui_headerFillType" />
+                <GuiElement type="text" profile="mSpawner_panelDialogListHeaderLitersPerHour" text="$l10n_ui_headerLitersPerHour" />
+                <GuiElement type="text" profile="mSpawner_panelDialogListHeaderState" text="$l10n_ui_headerState" />
+            </GuiElement>
+
+            <GuiElement
+                type="smoothList"
+                id="list"
+                profile="mSpawner_panelDialogList"
+                onDoubleClick="onItemDoubleClick"
+                focusInit="onOpen"
+            >
+                <GuiElement type="listItem" profile="mSpawner_panelDialogListItem">
+                    <GuiElement type="text" name="name" profile="mSpawner_panelDialogListItemName" />
+                    <GuiElement type="text" name="fillType" profile="mSpawner_panelDialogListItemFillType" />
+                    <GuiElement type="text" name="litersPerHour" profile="mSpawner_panelDialogListItemLitersPerHour" />
+                    <GuiElement type="text" name="state" profile="mSpawner_panelDialogListItemState" />
+                </GuiElement>
+            </GuiElement>
+
+            <GuiElement type="threePartBitmap" profile="mSpawner_areaDialogListVerticalSlider">
+                <GuiElement type="slider" profile="mSpawner_areaDialogListVerticalSliderBar" dataElementId="list" handleFocus="false" />
+            </GuiElement>
+        </GuiElement>
+
+        <GuiElement type="flowLayout" profile="mSpawner_dialogActionBox">
+            <GuiElement type="button" profile="mSpawner_dialogActionButtonBack" text="$l10n_button_back" onClick="onClickBack" id="backButton" />
+            <GuiElement type="button" profile="mSpawner_dialogActionButtonToggleEnable" text="$l10n_action_disableOutput" onClick="onClickToggleEnable" id="toggleEnableButton" />
+            <GuiElement type="button" profile="mSpawner_dialogActionButtonApply" text="$l10n_action_changeOutput" onClick="onClickOutput" id="outputButton" />
+        </GuiElement>
+    </GuiElement>
+</GUI>

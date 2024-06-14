@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUIProfiles>
+    <Profile name="mSpawner_button" extends="baseReference">
+        <Value name="size" value="316px 48px" />
+        <Value name="position" value="0 0" />
+        <Value name="margin" value="0" />
+
+        <Value name="handleFocus" value="true" />
+
+        <Value name="textBold" value="false" />
+        <Value name="textMaxWidth" value="290px" />
+        <Value name="textAlignment" value="center" />
+        <Value name="textUpperCase" value="true" />
+        <Value name="textVerticalAlignment" value="middle" />
+
+        <Value name="textSize" value="16px" />
+        <Value name="textColor" value="$_rgba(buttonText)" />
+        <Value name="textFocusedColor" value="$_rgba(buttonTextFocused)" />
+        <Value name="textSelectedColor" value="$_rgba(buttonTextSelected)" />
+        <Value name="textHighlightedColor" value="$_rgba(buttonTextHighlighted)" />
+
+        <Value name="imageColor" value="$_rgba(button, 0.5)" />
+        <Value name="imageDisabledColor" value="$_rgba(buttonDisabled, 0.1)" />
+        <Value name="imageFocusedColor" value="$_rgba(buttonFocused, 0.35)" />
+        <Value name="imageHighlightedColor" value="$_rgba(buttonHighlighted, 0.5)" />
+    </Profile>
+
+    <Profile name="mSpawner_actionButton" extends="mSpawner_button">
+        <Value name="size" value="316px 32px" />
+
+        <Value name="handleFocus" value="false" />
+        <Value name="fitToContent" value="true" />
+        <Value name="fitExtraWidth" value="32px" />
+
+        <Value name="iconFilename" value="g_baseUIFilename" />
+        <Value name="iconUVs" value="$preset_keyBoardKeyUVs" />
+        <Value name="iconSize" value="28px 28px" />
+        <Value name="iconTextOffset" value="-8px 0" />
+        <Value name="iconColor" value="$_rgb(actionButtonIcon) 0.5" />
+        <Value name="iconFocusedColor" value="$_rgb(actionButtonIcon) 1" />
+        <Value name="iconSelectedColor" value="$_rgb(actionButtonIcon) 1" />
+        <Value name="iconHighlightedColor" value="$_rgb(actionButtonIcon) 0.8" />
+        <Value name="iconDisabledColor" value="$_rgb(black) 0.4" />
+
+        <Value name="imageColor" value="0 0 0 0" />
+        <Value name="imageFocusedColor" value="0 0 0 0" />
+        <Value name="imageSelectedColor" value="0 0 0 0" />
+        <Value name="imageHighlightedColor" value="0 0 0 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textBold" value="true" />
+        <Value name="textAlignment" value="left" />
+        <Value name="textMaxNumLines" value="1" />
+        <Value name="textAutoWidth" value="true" />
+        <Value name="textColor" value="$_rgb(actionButton) 0.5" />
+        <Value name="textFocusedColor" value="$_rgb(actionButton) 1" />
+        <Value name="textSelectedColor" value="$_rgb(actionButton) 1" />
+        <Value name="textHighlightedColor" value="$_rgb(actionButton) 0.8" />
+        <Value name="textDisabledColor" value="$_rgb(black) 0.4" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogFullscreenBackground" extends="dialogFullscreenBg">
+        <Value name="imageColor" value="$_rgba(dialogFullscreenBackground)" />
+    </Profile>
+
+    <Profile name="mSpawner_stripesBarLeft" with="anchorMiddleLeft">
+        <Value name="size" value="28px 1024px" />
+        <Value name="position" value="8px 0" />
+
+        <Value name="imageFilename" value="g_materialSpawnerUIFilename" />
+        <Value name="imageUVs" value="0 992px 1024px 32px" />
+        <Value name="imageColor" value="$_rgba(stripesBar, 0.1)" />
+        <Value name="imageUVRotation" value="90" />
+    </Profile>
+
+    <Profile name="mSpawner_stripesBarRight" extends="mSpawner_stripesBarLeft" with="anchorMiddleRight">
+        <Value name="position" value="-8px 0" />
+    </Profile>
+
+    <Profile name="mSpawner_topShadow">
+        <Value name="size" value="100px 16px" />
+        <Value name="position" value="0 0" />
+        <Value name="anchors" value="0 1 1 1" />
+
+        <Value name="imageUVs" value="0 936px 1024px 56px" />
+        <Value name="imageColor" value="$_rgb(black) 0.4" />
+        <Value name="imageFilename" value="g_materialSpawnerUIFilename" />
+    </Profile>
+
+    <Profile name="mSpawner_bottomShadow" extends="mSpawner_topShadow">
+        <Value name="anchors" value="0 1 0 0" />
+
+        <Value name="imageUVRotation" value="180" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogTopShadow" extends="mSpawner_topShadow">
+        <Value name="anchors" value="-0.1 1.1 1 1" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogBottomShadow" extends="mSpawner_bottomShadow">
+        <Value name="anchors" value="-0.1 1.1 0 0" />
+    </Profile>
+
+    <Profile name="theme_dialogHeader" with="anchorTopCenter">
+        <Value name="size" value="420px 58px" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogHeader" with="anchorTopCenter">
+        <Value name="size" value="420px 58px" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogHeaderTitle" extends="textDefault" with="anchorBottomCenter">
+        <Value name="size" value="316px 32px" />
+        <Value name="position" value="0" />
+
+        <Value name="textColor" value="$_rgb(primary) 1" />
+        <Value name="textSize" value="24px" />
+        <Value name="textBold" value="false" />
+        <Value name="textAutoWidth" value="true" />
+        <Value name="textUpperCase" value="true" />
+        <Value name="textAlignment" value="center" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogActionBox" extends="baseReference" with="anchorBottomLeft">
+        <Value name="size" value="640px 60px" />
+        <Value name="position" value="80px 8px" />
+
+        <Value name="alignmentX" value="left" />
+        <Value name="alignmentY" value="middle" />
+        <Value name="useFullVisibility" value="false" />
+        <Value name="autoValidateLayout" value="true" />
+
+        <Value name="imageColor" value="$preset_colorTransparent" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogActionButtonBack" extends="mSpawner_actionButton">
+        <Value name="inputAction" value="MENU_BACK" />
+        <Value name="clickSound" value="BACK" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogActionButtonApply" extends="mSpawner_actionButton">
+        <Value name="inputAction" value="MENU_ACCEPT" />
+        <Value name="clickSound" value="YES" />
+    </Profile>
+
+    <Profile name="mSpawner_dialogActionButtonToggleEnable" extends="mSpawner_actionButton">
+        <Value name="inputAction" value="MENU_EXTRA_2" />
+        <Value name="clickSound" value="YES" />
+    </Profile>
+
+    <!-- MaterialSpawnerDialog -->
+
+    <Profile name="mSpawner_panelDialog" extends="baseReference" with="anchorMiddleCenter">
+        <Value name="size" value="900px 720px" />
+
+        <Value name="imageColor" value="$_rgba(dialogElement, 1.0)" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogContent" extends="emptyPanel" with="anchorMiddleCenter">
+        <Value name="size" value="740px 560px" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListHeader" extends="emptyPanel" with="anchorTopLeft">
+        <Value name="size" value="740px 64px" />
+        <Value name="imageColor" value="$preset_colorListHeaderBackground" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListHeaderName" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="128px 20px" />
+        <Value name="position" value="12px 0" />
+        <Value name="textSize" value="14px" />
+        <Value name="textUpperCase" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListHeaderFillType" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="128px 20px" />
+        <Value name="position" value="300px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textUpperCase" value="true" />
+    </Profile>
+    <Profile name="mSpawner_panelDialogListHeaderLitersPerHour" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="120px 20px" />
+        <Value name="position" value="480px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textUpperCase" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListHeaderState" extends="textDefault" with="anchorMiddleRight">
+        <Value name="size" value="120px 20px" />
+        <Value name="position" value="-16px 0" />
+
+        <Value name="textAlignment" value="right" />
+        <Value name="textSize" value="14px" />
+        <Value name="textUpperCase" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogList" extends="list" with="anchorBottomRight">
+        <Value name="size" value="740px 492px" />
+
+        <Value name="isHorizontalList" value="false" />
+        <Value name="selectedWithoutFocus" value="true" />
+        <Value name="listItemSpacing" value="2px" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListItem" extends="listItem">
+        <Value name="size" value="440px 48px" />
+
+        <Value name="imageColor" value="$preset_colorListRowBackground" />
+        <Value name="imageFocusedColor" value="$_rgb(mainColor) 0.1" />
+        <Value name="imageSelectedColor" value="$_rgb(mainColor) 0.1" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListItemName" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="300px 32px" />
+        <Value name="position" value="16px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textColor" value="$_rgba(listItemText)" />
+        <Value name="textSelectedColor" value="$_rgba(listItemTextSelected)" />
+
+        <Value name="textAutoWidth" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListItemFillType" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="140px 32px" />
+        <Value name="position" value="300px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textColor" value="$_rgba(listItemText)" />
+        <Value name="textSelectedColor" value="$_rgba(listItemTextSelected)" />
+
+        <Value name="textAutoWidth" value="true" />
+        <Value name="textUpperCase" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListItemLitersPerHour" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="140px 32px" />
+        <Value name="position" value="480px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textColor" value="$_rgba(listItemText)" />
+        <Value name="textSelectedColor" value="$_rgba(listItemTextSelected)" />
+
+        <Value name="textAutoWidth" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_panelDialogListItemState" extends="textDefault" with="anchorMiddleRight">
+        <Value name="size" value="140px 32px" />
+        <Value name="position" value="-16px 0" />
+
+        <Value name="textAlignment" value="right" />
+        <Value name="textSize" value="14px" />
+        <Value name="textColor" value="$_rgba(listItemText)" />
+        <Value name="textSelectedColor" value="$_rgba(listItemTextSelected)" />
+        <Value name="textDisabledColor" value="$_rgba(listItemTextDisabled)" />
+
+        <Value name="textAutoWidth" value="true" />
+    </Profile>
+
+    <!-- MaterialSpawnerAreaDialog -->
+
+    <Profile name="mSpawner_areaDialog" extends="baseReference" with="anchorMiddleCenter">
+        <Value name="size" value="600px 720px" />
+
+        <Value name="imageColor" value="$_rgba(dialogElement, 1.0)" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogStripesBarLeft" extends="mSpawner_stripesBarLeft">
+        <Value name="size" value="20px 704px" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogStripesBarRight" extends="mSpawner_stripesBarRight">
+        <Value name="size" value="20px 704px" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogTopShadow" extends="mSpawner_dialogTopShadow">
+        <Value name="anchors" value="-0.05 1.05 1 1" />
+    </Profile>
+    <Profile name="mSpawner_areaDialogBottomShadow" extends="mSpawner_dialogBottomShadow">
+        <Value name="anchors" value="-0.05 1.05 0 0" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogContent" extends="emptyPanel" with="anchorMiddleCenter">
+        <Value name="size" value="440px 560px" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogList" extends="list" with="anchorBottomRight">
+        <Value name="size" value="440px 560px" />
+
+        <Value name="isHorizontalList" value="false" />
+        <Value name="selectedWithoutFocus" value="true" />
+        <Value name="listItemSpacing" value="2px" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogListItem" extends="listItem">
+        <Value name="size" value="440px 48px" />
+
+        <Value name="imageColor" value="$preset_colorListRowBackground" />
+        <Value name="imageFocusedColor" value="$_rgb(mainColor) 0.1" />
+        <Value name="imageSelectedColor" value="$_rgb(mainColor) 0.1" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogListItemIcon" with="anchorMiddleLeft">
+        <Value name="size" value="48px 48px" />
+
+        <Value name="imageColor" value="1 1 1 1" />
+        <Value name="imageUVs" value="0 0 1 1" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogListItemText" extends="textDefault" with="anchorMiddleLeft">
+        <Value name="size" value="300px 32px" />
+        <Value name="position" value="64px 0" />
+
+        <Value name="textSize" value="14px" />
+        <Value name="textColor" value="$_rgba(listItemText)" />
+        <Value name="textSelectedColor" value="$_rgba(listItemTextSelected)" />
+
+        <Value name="textAutoWidth" value="true" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogListVerticalSlider" extends="verticalListSliderRightDocked" with="anchorTopRight">
+        <Value name="size" value="12px 560px" />
+
+        <Value name="imageColor" value="$_rgba(stripesBar, 0.1)" />
+        <Value name="startImageColor" value="$_rgba(stripesBar, 0.1)" />
+        <Value name="endImageColor" value="$_rgba(stripesBar, 0.1)" />
+    </Profile>
+
+    <Profile name="mSpawner_areaDialogListVerticalSliderBar" extends="verticalListSliderBar" with="anchorMiddleCenter">
+        <Value name="size" value="6px 552px" />
+
+        <Value name="sliderImageColor" value="$_rgba(stripesBar, 0.1)" />
+        <Value name="startImageColor" value="$_rgba(stripesBar, 0.1)" />
+        <Value name="endImageColor" value="$_rgba(stripesBar, 0.1)" />
+    </Profile>
+</GUIProfiles>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement type="empty" profile="newLayer" />
+    <GuiElement type="bitmap" profile="mSpawner_dialogFullscreenBackground" />
+    <GuiElement type="bitmap" profile="bgVignette" />
+    <GuiElement type="bitmap" profile="bgGlowDialog" />
+
+    <GuiElement type="bitmap" id="dialogElement" profile="mSpawner_areaDialog">
+        <GuiElement type="bitmap" profile="mSpawner_areaDialogStripesBarLeft" />
+        <GuiElement type="bitmap" profile="mSpawner_areaDialogStripesBarRight" />
+
+        <GuiElement type="empty" profile="mSpawner_dialogHeader">
+            <GuiElement type="text" profile="mSpawner_dialogHeaderTitle" text="$l10n_ui_materialSpawnerAreaDialogTitle" />
+        </GuiElement>
+
+        <GuiElement type="bitmap" profile="mSpawner_areaDialogContent">
+            <GuiElement type="bitmap" profile="mSpawner_areaDialogTopShadow" />
+            <GuiElement type="bitmap" profile="mSpawner_areaDialogBottomShadow" />
+
+            <GuiElement
+                type="smoothList"
+                id="list"
+                profile="mSpawner_areaDialogList"
+                focusInit="onOpen"
+                onDoubleClick="onItemDoubleClick"
+            >
+                <GuiElement type="listItem" profile="mSpawner_areaDialogListItem">
+                    <GuiElement type="bitmap" name="icon" profile="mSpawner_areaDialogListItemIcon" />
+                    <GuiElement type="text" name="title" profile="mSpawner_areaDialogListItemText" />
+                </GuiElement>
+            </GuiElement>
+
+            <GuiElement type="threePartBitmap" profile="mSpawner_areaDialogListVerticalSlider">
+                <GuiElement type="slider" profile="mSpawner_areaDialogListVerticalSliderBar" dataElementId="list" handleFocus="false" />
+            </GuiElement>
+        </GuiElement>
+
+        <GuiElement type="flowLayout" profile="mSpawner_dialogActionBox">
+            <GuiElement type="button" profile="mSpawner_dialogActionButtonBack" text="$l10n_button_back" onClick="onClickBack" id="backButton" />
+            <GuiElement type="button" profile="mSpawner_dialogActionButtonApply" text="$l10n_button_apply" onClick="onClickApply" id="applyButton" />
+        </GuiElement>
+    </GuiElement>
+</GUI>
