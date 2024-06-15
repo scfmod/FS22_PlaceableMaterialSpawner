@@ -80,6 +80,9 @@ function PlaceableMaterialSpawner:onDelete()
     for _, area in ipairs(spec.areas) do
         area:delete()
     end
+
+    spec.activatable = nil
+    spec.areas = {}
 end
 
 function PlaceableMaterialSpawner:onFinalizePlacement()
