@@ -47,7 +47,7 @@ function MaterialSpawnerActivatable:load(xmlFile, path)
             if CollisionFlag.getHasFlagSet(self.triggerNode, CollisionFlag.TRIGGER_PLAYER) then
                 addTrigger(self.triggerNode, 'activationTriggerCallback', self)
             else
-                Logging.xmlWarning(xmlFile, 'Missing TRIGGER_PLAYER flag on node: %s', path .. '#node')
+                Logging.xmlWarning(xmlFile, 'Missing TRIGGER_PLAYER collision flag (bit 20) on node: %s', path .. '#node')
             end
         end
     end
