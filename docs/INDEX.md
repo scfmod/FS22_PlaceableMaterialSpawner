@@ -42,6 +42,9 @@
                 <!-- By choice you can define multiple filltypes. -->
                 <!-- In order to enable GUI to change output, activationTrigger needs to be added -->
                 <fillTypes>STONE</fillTypes>
+                <!--
+                <fillTypes>STONE IRONORE</fillTypes>
+                -->
 
                 <area startNode=".." widthNode=".." heightNode=".." />
 
