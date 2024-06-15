@@ -60,10 +60,14 @@ function PlaceableMaterialSpawner:onLoad()
     xmlFile:iterate('placeable.materialSpawner.spawnAreas.spawnArea', function(_, areaKey)
         local area = MaterialSpawnerArea.new(self, #spec.areas + 1)
 
-        area:load(xmlFile, areaKey)
-
-        table.insert(spec.areas, area)
+        if area:load(xmlFile, areaKey) then
+            table.insert(spec.areas, area)
+        end
     end)
+
+    if #spec.areas == 0 then
+        Logging.xmlWarning(xmlFile, 'No valid spawnAreas registered: placeable.materialSpawner.spawnAreas')
+    end
 
     spec.activatable = MaterialSpawnerActivatable.new(self)
     spec.activatable:load(xmlFile, 'placeable.materialSpawner.activationTrigger')

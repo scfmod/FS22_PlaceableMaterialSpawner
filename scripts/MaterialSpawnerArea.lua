@@ -95,6 +95,8 @@ end
 
 ---@param xmlFile XMLFile
 ---@param path string
+---@return boolean
+---@nodiscard
 function MaterialSpawnerArea:load(xmlFile, path)
     self.name = MaterialSpawnerUtils.getPlaceableText(self.placeable, xmlFile:getValue(path .. '.name'), self.name)
 
@@ -112,18 +114,21 @@ function MaterialSpawnerArea:load(xmlFile, path)
 
     if self.startNode == nil then
         Logging.xmlError(xmlFile, 'Missing area#startNode in spawnArea: %s', path)
+        return false
     end
 
     self.widthNode = xmlFile:getValue(path .. '.area#widthNode', nil, self.placeable.components, self.placeable.i3dMappings)
 
     if self.widthNode == nil then
         Logging.xmlError(xmlFile, 'Missing area#widthNode in spawnArea: %s', path)
+        return false
     end
 
     self.heightNode = xmlFile:getValue(path .. '.area#heightNode', nil, self.placeable.components, self.placeable.i3dMappings)
 
     if self.heightNode == nil then
         Logging.xmlError(xmlFile, 'Missing area#heightNode in spawnArea: %s', path)
+        return false
     end
 
     self.litersPerHour = xmlFile:getValue(path .. '.litersPerHour', self.litersPerHour)
@@ -149,6 +154,8 @@ function MaterialSpawnerArea:load(xmlFile, path)
     end
 
     self:setFillType(self.fillTypes[1])
+
+    return true
 end
 
 ---@param xmlFile XMLFile
