@@ -1,3 +1,5 @@
+![Logo](./icon_placeableMaterialSpawner.png)
+
 # Placeable Material Spawner
 
 Specialization for spawning materials with placeables.
