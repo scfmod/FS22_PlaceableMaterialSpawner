@@ -48,7 +48,7 @@
             </spawnArea>
 
             <spawnArea defaultEnabled="false">
-                <name>Rare earth materials</name>
+                <name>$l10n_rareEarthMinerals</name>
                 <litersPerHour>100</litersPerHour>
                 <fillTypes>LITHIUMORE</fillTypes>
 

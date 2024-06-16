@@ -36,6 +36,7 @@
         <spawnAreas>
             <!-- Define 1 or more spawn areas -->
             <spawnArea>
+                <!-- Supports using l10n texts from mod -->
                 <name>Conveyor</name>
                 <litersPerHour>4000</litersPerHour>
                 
