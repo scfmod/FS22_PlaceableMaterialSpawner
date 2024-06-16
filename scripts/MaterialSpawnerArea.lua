@@ -29,6 +29,7 @@ MaterialSpawnerArea.STATE_ON = 1
 
 MaterialSpawnerArea.SEND_NUM_BITS_STATE = 1
 MaterialSpawnerArea.SEND_NUM_BITS_INDEX = 4
+MaterialSpawnerArea.MAX_NUM_INDEX = 2 ^ MaterialSpawnerArea.SEND_NUM_BITS_INDEX - 1
 
 local MaterialSpawnerArea_mt = Class(MaterialSpawnerArea)
 

@@ -48,8 +48,6 @@ function PlaceableMaterialSpawner.registerEventListeners(placeableType)
 end
 
 function PlaceableMaterialSpawner:onLoad()
-    -- Logging.info('PlaceableMaterialSpawner:onLoad()')
-
     local xmlFile = self.xmlFile
 
     ---@type MaterialSpawnerSpecialization
@@ -58,7 +56,14 @@ function PlaceableMaterialSpawner:onLoad()
     spec.areas = {}
 
     xmlFile:iterate('placeable.materialSpawner.spawnAreas.spawnArea', function(_, areaKey)
-        local area = MaterialSpawnerArea.new(self, #spec.areas + 1)
+        local index = #spec.areas + 1
+
+        if index > MaterialSpawnerArea.MAX_NUM_INDEX then
+            Logging.xmlWarning(xmlFile, 'Reached max number of spawnAreas (%i)', index)
+            return false
+        end
+
+        local area = MaterialSpawnerArea.new(self, index)
 
         if area:load(xmlFile, areaKey) then
             table.insert(spec.areas, area)
