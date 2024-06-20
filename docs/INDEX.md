@@ -6,6 +6,9 @@
 - [Placeable XML](#placeable-xml)
 - [Activation trigger](#activation-trigger)
 
+Documentation files:
+- 🗎 [XSD validation schema](./schema/placeable_materialSpawner.xsd)
+- 🗎 [HTML schema](./schema/placeable_materialSpawner.html)
 
 ## Add specialization to placeable type
 
