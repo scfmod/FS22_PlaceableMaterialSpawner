@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <l10n>
     <texts>
-        <text name="action_openControlPanel" text="Open control panel" />
         <text name="action_changeOutput" text="Change material" />
-        <text name="action_enableOutput" text="Enable output" />
         <text name="action_disableOutput" text="Disable output" />
-
-        <text name="ui_materialSpawnerDialogTitle" text="Control panel" />
-        <text name="ui_materialSpawnerAreaDialogTitle" text="Select material" />
-
-        <text name="ui_headerName" text="Output" />
+        <text name="action_enableOutput" text="Enable output" />
+        <text name="action_openControlPanel" text="Open control panel" />
         <text name="ui_headerFillType" text="Material" />
         <text name="ui_headerLitersPerHour" text="Liters per hour" />
+        <text name="ui_headerName" text="Output" />
         <text name="ui_headerState" text="Status" />
+        <text name="ui_materialSpawnerAreaDialogTitle" text="Select material" />
+        <text name="ui_materialSpawnerDialogTitle" text="Control panel" />
     </texts>
 </l10n>
