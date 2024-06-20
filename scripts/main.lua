@@ -9,6 +9,9 @@ local function load(path)
     source(g_currentModDirectory .. 'scripts/' .. path)
 end
 
+---@diagnostic disable-next-line: lowercase-global
+g_debugMaterialSpawner = fileExists(g_currentModDirectory .. 'scripts/debug.lua')
+
 -- Utils
 load('utils/MaterialSpawnerUtils.lua')
 

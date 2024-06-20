@@ -11,7 +11,9 @@ function MaterialSpawnerGUI.new()
     ---@type MaterialSpawnerGUI
     local self = setmetatable({}, MaterialSpawnerGUI_mt)
 
-    addConsoleCommand('msReloadGui', '', 'consoleReloadGui', self)
+    if g_debugMaterialSpawner then
+        addConsoleCommand('msReloadGui', '', 'consoleReloadGui', self)
+    end
 
     return self
 end
