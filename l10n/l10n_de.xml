@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l10n>
+    <texts>
+        <text name="action_changeOutput" text="Material wechseln" />
+        <text name="action_disableOutput" text="Ausgabe deaktivieren" />
+        <text name="action_enableOutput" text="Ausgabe aktivieren" />
+        <text name="action_openControlPanel" text="Öffnen Sie die Systemsteuerung" />
+        <text name="ui_headerFillType" text="Material" />
+        <text name="ui_headerLitersPerHour" text="Liter pro Stunde" />
+        <text name="ui_headerName" text="Ausgabe" />
+        <text name="ui_headerState" text="Status" />
+        <text name="ui_materialSpawnerAreaDialogTitle" text="Material auswählen" />
+        <text name="ui_materialSpawnerDialogTitle" text="Bedienfeld" />
+    </texts>
+</l10n>
