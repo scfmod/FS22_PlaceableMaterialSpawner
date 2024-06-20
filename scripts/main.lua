@@ -12,7 +12,7 @@ end
 ---@diagnostic disable-next-line: lowercase-global
 g_debugMaterialSpawner = fileExists(g_currentModDirectory .. 'scripts/debug.lua')
 
-local generateSchema = true
+local generateSchema = false
 
 if generateSchema then
     load('schema.lua')
