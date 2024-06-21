@@ -1,3 +1,12 @@
+---@class AreaLine
+---@field sx number
+---@field sy number
+---@field sz number
+---@field ex number
+---@field ey number
+---@field ez number
+---@field radius number
+
 ---@class MaterialSpawnerArea
 ---@field index number
 ---@field placeable PlaceableMaterialSpawner
@@ -11,6 +20,9 @@
 ---@field buffer number
 ---@field lineOffset number
 ---@field fillTypes FillTypeObject[]
+---@field useProductionStorage boolean
+---@field minValidLiters number
+---@field areaLine AreaLine
 ---
 ---@field startNode number
 ---@field widthNode number
@@ -27,6 +39,8 @@ MaterialSpawnerArea = {}
 MaterialSpawnerArea.STATE_OFF = 0
 MaterialSpawnerArea.STATE_ON = 1
 
+MaterialSpawnerArea.BUFFER_MAX_SIZE = 500
+
 MaterialSpawnerArea.SEND_NUM_BITS_STATE = 1
 MaterialSpawnerArea.SEND_NUM_BITS_INDEX = 4
 MaterialSpawnerArea.MAX_NUM_INDEX = 2 ^ MaterialSpawnerArea.SEND_NUM_BITS_INDEX - 1
@@ -40,6 +54,7 @@ function MaterialSpawnerArea.registerXMLPaths(schema, key)
     schema:register(XMLValueType.STRING, key .. '.fillTypes', 'Filltype(s)', 'STONE', true)
     schema:register(XMLValueType.INT, key .. '.litersPerHour', 'Liters produced per hour', 1000, true)
     schema:register(XMLValueType.BOOL, key .. '#defaultEnabled', 'Set to false to disable spawn area by default', true, false)
+    schema:register(XMLValueType.BOOL, key .. '#useProductionStorage', nil, false)
 
     schema:register(XMLValueType.NODE_INDEX, key .. '.area#startNode', '', nil, true)
     schema:register(XMLValueType.NODE_INDEX, key .. '.area#widthNode', '', nil, true)
@@ -77,6 +92,8 @@ function MaterialSpawnerArea.new(placeable, index, customMt)
     self.fillTypes = {}
     self.litersPerHour = 1000
     self.buffer = 0
+    self.useProductionStorage = false
+    self.minValidLiters = 0
 
     self.effects = {}
     self.animationNodes = {}
@@ -154,7 +171,19 @@ function MaterialSpawnerArea:load(xmlFile, path)
         self.effects = g_effectManager:loadEffect(xmlFile, path .. '.effectNodes', self.placeable.components, self.placeable, self.placeable.i3dMappings)
     end
 
+    self.areaLine = MaterialSpawnerUtils.getAreaLine(self.startNode, self.widthNode, self.heightNode)
+
     self:setFillType(self.fillTypes[1])
+
+    self.useProductionStorage = xmlFile:getValue(path .. '#useProductionStorage', self.useProductionStorage)
+
+    if self.useProductionStorage then
+        if not SpecializationUtil.hasSpecialization(PlaceableProductionPoint, self.placeable.specializations) then
+            Logging.xmlWarning(xmlFile, 'The "useProductionStorage" attribute requires PlaceableProductionPoint specialization: %s', path .. '#useProductionStorage')
+
+            self.useProductionStorage = false
+        end
+    end
 
     return true
 end
@@ -200,6 +229,8 @@ function MaterialSpawnerArea:setFillType(fillType)
 
         self.currentFillType = fillType
 
+        self.minValidLiters = g_densityMapHeightManager:getMinValidLiterValue(fillType.index)
+
         if self.isClient then
             g_effectManager:setFillType(self.effects, fillType.index)
         end
@@ -241,8 +272,6 @@ end
 ---@param state number
 function MaterialSpawnerArea:setState(state)
     if self.state ~= state then
-        -- Logging.info('MaterialSpawnerArea:setState() %s', tostring(state))
-
         if self.isServer then
             local event = SetMaterialSpawnerAreaStateEvent.new(self.placeable, self.index, state)
             g_server:broadcastEvent(event)
@@ -263,8 +292,6 @@ end
 ---@param enabled boolean
 function MaterialSpawnerArea:setEnabled(enabled)
     if self.enabled ~= enabled then
-        -- Logging.info('MaterialSpawnerArea:setEnabled() %s', tostring(enabled))
-
         if self.isServer then
             local event = SetMaterialSpawnerAreaEnabledEvent.new(self.placeable, self.index, enabled)
             g_server:broadcastEvent(event)
@@ -285,16 +312,19 @@ function MaterialSpawnerArea:onUpdateTick(dt)
     if self.enabled and self.currentFillType ~= nil then
         local amount = g_currentMission:getEffectiveTimeScale() * dt * self.litersPerMs
 
-        self.buffer = self.buffer + amount
+        self.buffer = math.min(self.buffer + amount, MaterialSpawnerArea.BUFFER_MAX_SIZE)
 
-        if self.buffer > g_densityMapHeightManager:getMinValidLiterValue(self.currentFillType.index) then
-            local lsx, lsy, lsz, lex, ley, lez, radius = DensityMapHeightUtil.getLineByArea(self.startNode, self.widthNode, self.heightNode, false)
-            local dropped, lineOffset = DensityMapHeightUtil.tipToGroundAroundLine(nil, self.buffer, self.currentFillType.index, lsx, lsy, lsz, lex, ley, lez, radius, radius, self.lineOffset, nil, nil, nil)
+        if self.buffer > self.minValidLiters then
+            local dropped = 0
 
-            self.lineOffset = lineOffset
+            if self.useProductionStorage then
+                dropped = self:dischargeFromProductionPoint(self.buffer)
+            else
+                dropped = self:discharge(self.buffer)
+            end
 
             if dropped > 0 then
-                self.buffer = 0
+                self.buffer = math.max(0, self.buffer - dropped)
 
                 if self.state ~= MaterialSpawnerArea.STATE_ON then
                     self:setState(MaterialSpawnerArea.STATE_ON)
@@ -304,9 +334,73 @@ function MaterialSpawnerArea:onUpdateTick(dt)
     end
 end
 
-function MaterialSpawnerArea:onStart()
-    -- Logging.info('MaterialSpawnerArea:onStart()')
+---@param litersToDrop number
+---@return number
+---@nodiscard
+function MaterialSpawnerArea:dischargeFromProductionPoint(litersToDrop)
+    local storage = self:getProductionPointStorage()
 
+    if storage == nil then
+        Logging.warning('MaterialSpawnerArea:dischargeFromProductionPoint() Could not find production point storage, disabling and reverting to default behaviour.')
+        self.useProductionStorage = false
+
+        return 0
+    end
+
+    local fillLevel = storage:getFillLevel(self.currentFillType.index)
+
+    if fillLevel > self.minValidLiters then
+        local targetLiters = math.min(fillLevel, self:getAvailableGroundDischargeAmount(litersToDrop))
+
+        if targetLiters > self.minValidLiters then
+            local dropped = self:discharge(targetLiters)
+
+            storage:setFillLevel(fillLevel - dropped, self.currentFillType.index)
+
+            return dropped
+        end
+    end
+
+    return 0
+end
+
+---@return Storage | nil
+function MaterialSpawnerArea:getProductionPointStorage()
+    return self.placeable.spec_productionPoint.productionPoint and self.placeable.spec_productionPoint.productionPoint.storage
+end
+
+function MaterialSpawnerArea:getAvailableGroundDischargeAmount(litersToDrop)
+    local dropped, lineOffset = DensityMapHeightUtil.tipToGroundAroundLine(
+        nil, litersToDrop, self.currentFillType.index,
+        self.areaLine.sx, self.areaLine.sy, self.areaLine.sz,
+        self.areaLine.ex, self.areaLine.ey, self.areaLine.ez,
+        self.areaLine.radius, self.areaLine.radius,
+        self.lineOffset, nil, nil, nil, false
+    )
+
+    self.lineOffset = lineOffset
+
+    return dropped
+end
+
+---@param litersToDrop number
+---@return number
+---@nodiscard
+function MaterialSpawnerArea:discharge(litersToDrop)
+    local dropped, lineOffset = DensityMapHeightUtil.tipToGroundAroundLine(
+        nil, litersToDrop, self.currentFillType.index,
+        self.areaLine.sx, self.areaLine.sy, self.areaLine.sz,
+        self.areaLine.ex, self.areaLine.ey, self.areaLine.ez,
+        self.areaLine.radius, self.areaLine.radius,
+        self.lineOffset, nil, nil, nil
+    )
+
+    self.lineOffset = lineOffset
+
+    return dropped
+end
+
+function MaterialSpawnerArea:onStart()
     if self.isClient then
         g_soundManager:playSamples(self.samples)
         g_effectManager:startEffects(self.effects)
@@ -315,8 +409,6 @@ function MaterialSpawnerArea:onStart()
 end
 
 function MaterialSpawnerArea:onStop()
-    -- Logging.info('MaterialSpawnerArea:onStop()')
-
     if self.isClient then
         g_soundManager:stopSamples(self.samples)
         g_effectManager:stopEffects(self.effects)

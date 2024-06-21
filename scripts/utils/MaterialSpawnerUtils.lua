@@ -71,3 +71,21 @@ function MaterialSpawnerUtils.loadFillTypesFromXML(xmlFile, key)
 
     return fillTypes
 end
+
+---@param startNode number
+---@param widthNode number
+---@param heightNode number
+---@return AreaLine
+function MaterialSpawnerUtils.getAreaLine(startNode, widthNode, heightNode)
+    local sx, sy, sz, ex, ey, ez, radius = DensityMapHeightUtil.getLineByArea(startNode, widthNode, heightNode, false)
+
+    return {
+        sx = sx,
+        sy = sy,
+        sz = sz,
+        ex = ex,
+        ey = ey,
+        ez = ez,
+        radius = radius
+    }
+end

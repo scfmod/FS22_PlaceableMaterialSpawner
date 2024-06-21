@@ -2,11 +2,15 @@
 ---@field areas MaterialSpawnerArea[]
 ---@field activatable MaterialSpawnerActivatable
 
+---@class PlaceableProductionPointSpecialization
+---@field productionPoint ProductionPoint
+
 source(g_currentModDirectory .. 'scripts/placeableSpecializations/events/SetMaterialSpawnerAreaEnabledEvent.lua')
 source(g_currentModDirectory .. 'scripts/placeableSpecializations/events/SetMaterialSpawnerAreaFilltypeEvent.lua')
 source(g_currentModDirectory .. 'scripts/placeableSpecializations/events/SetMaterialSpawnerAreaStateEvent.lua')
 
 ---@class PlaceableMaterialSpawner : Placeable
+---@field spec_productionPoint PlaceableProductionPointSpecialization
 PlaceableMaterialSpawner = {}
 
 ---@type string
