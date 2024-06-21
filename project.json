@@ -1,16 +1,16 @@
 {
-    "build": {
-        "filename": "FS22_1_PlaceableMaterialSpawner.zip",
+    "archive": {
+        "targetFile": "build/FS22_1_PlaceableMaterialSpawner.zip",
         "extensions": [
-            ".xml",
-            ".dds",
-            ".lua"
+            "xml",
+            "dds",
+            "lua"
         ],
         "exclude": [
-            ".git",
-            ".vscode",
-            "build",
-            "docs",
+            ".git/",
+            ".vscode/",
+            "build/",
+            "docs/",
             "scripts/types.lua",
             "xml/guiProfiles.template.xml"
         ],
@@ -24,13 +24,9 @@
             ]
         }
     },
-    "profiles": {
-        "data": "xml/guiProfiles.jsonc",
-        "template": "xml/guiProfiles.template.xml",
-        "filename": "xml/guiProfiles.xml"
-    },
-    "textures": [
-        "icon_placeableMaterialSpawner.gim",
-        "textures/ui_elements.gim"
-    ]
+    "profile": {
+        "variablesFile": "xml/guiProfiles.jsonc",
+        "templateFile": "xml/guiProfiles.template.xml",
+        "targetFile": "xml/guiProfiles.xml"
+    }
 }
