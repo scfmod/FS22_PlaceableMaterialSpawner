@@ -4320,6 +4320,9 @@
                                                 <xs:attribute name="defaultEnabled" type="g_bool" default="true">
                                                     <xs:annotation><xs:documentation xml:lang="en">Set to false to disable spawn area by default</xs:documentation></xs:annotation>
                                                 </xs:attribute>
+                                                <xs:attribute name="useProductionStorage" type="g_bool" default="false">
+                                                    <xs:annotation><xs:documentation xml:lang="en">Spawn material from production point storage</xs:documentation></xs:annotation>
+                                                </xs:attribute>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:choice>

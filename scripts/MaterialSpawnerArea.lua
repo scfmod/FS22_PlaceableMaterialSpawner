@@ -54,7 +54,7 @@ function MaterialSpawnerArea.registerXMLPaths(schema, key)
     schema:register(XMLValueType.STRING, key .. '.fillTypes', 'Filltype(s)', 'STONE', true)
     schema:register(XMLValueType.INT, key .. '.litersPerHour', 'Liters produced per hour', 1000, true)
     schema:register(XMLValueType.BOOL, key .. '#defaultEnabled', 'Set to false to disable spawn area by default', true, false)
-    schema:register(XMLValueType.BOOL, key .. '#useProductionStorage', nil, false)
+    schema:register(XMLValueType.BOOL, key .. '#useProductionStorage', 'Spawn material from production point storage', false)
 
     schema:register(XMLValueType.NODE_INDEX, key .. '.area#startNode', '', nil, true)
     schema:register(XMLValueType.NODE_INDEX, key .. '.area#widthNode', '', nil, true)
