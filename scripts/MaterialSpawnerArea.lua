@@ -329,6 +329,8 @@ function MaterialSpawnerArea:onUpdateTick(dt)
                 if self.state ~= MaterialSpawnerArea.STATE_ON then
                     self:setState(MaterialSpawnerArea.STATE_ON)
                 end
+            else
+                self.buffer = self.minValidLiters
             end
         end
     end
