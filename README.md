@@ -2,7 +2,7 @@
 
 # Placeable Material Spawner
 
-Specialization for spawning materials with placeables.
+Specialization for spawning materials with placeables. This specialization enables spawning materials in one or more designated areas. It also supports pulling from ProductionPoint storage if enabled.
 
 ```
 author: scfmod
@@ -17,11 +17,11 @@ IT TO LEARN, FORK AND SPREAD THE KNOWLEDGE.
 
 ## How to download and install
 
-Download the latest ```FS22_1_PlaceableMaterialSpawner.zip``` from [Releases](https://github.com/scfmod/FS22_PlaceableMaterialSpawner/releases/latest) and copy/move it into your FS22 mods folder.
+Download the latest [```FS22_1_PlaceableMaterialSpawner.zip```](https://github.com/scfmod/FS22_PlaceableMaterialSpawner/releases/latest/download/FS22_1_PlaceableMaterialSpawner.zip) and copy/move it into your FS22 mods folder.
 
 ## Multiplayer
 
-Multiplayer is fully supported. Only admin will be able to access the GUI control panel in-game if support is added in the placeable configuration file.
+Multiplayer is fully supported. Only players with admin permission will be able to access the GUI control panel in-game (if applicable).
 
 ## Documentation
 
