@@ -91,6 +91,7 @@ placeable.materialSpawner.activationTrigger
 |------|------|----------|---------|-------------|
 | node | node | No | | |
 
+(Optional)
 Player activation trigger for openening the control panel GUI. This allows you to change materials if applicable and disable/enable each spawn area. The collisionMask of node must have bit ```20``` (TRIGGER_PLAYER) set in order for it to function.
 
 ```xml
@@ -110,18 +111,64 @@ Player activation trigger for openening the control panel GUI. This allows you t
 placeable.materialSpawner.spawnAreas.spawnArea(%)
 ```
 
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <activationTrigger node="playerControlPanelTriggerNode" />
+
+        <spawnAreas>
+            <spawnArea useProductionStorage="false" defaultEnabled="true">
+                <name>$l10n_mySpawnArea</name>
+                <litersPerHour>1000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+
+                ...
+            </spawnArea>
+        </spawnAreas>
+    </materialSpawner>
+</placeable>
+```
+
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | name | string | No | | Name to show in control panel GUI |
 | fillTypes | string | Yes | | Name of fillType(s) separated by whitespace |
 | litersPerHour | int | No | ```100``` | Liters per hour to spawn |
+
+#### Attributes
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
 | defaultEnabled | boolean | No | ```true``` | Set default enabled for spawn area |
-| useProductionStorage | boolean | No | ```false``` | If placeable has ProductionPoint specialization, draw material out from the storage |
+| useProductionStorage | boolean | No | ```false``` | If placeable has ProductionPoint specialization, pull material out from the storage |
+
 
 ### Area
 
 ```
 placeable.materialSpawner.spawnAreas.spawnArea(%).area
+```
+
+(Required) Define area in which to spawn material.
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <activationTrigger node="playerControlPanelTriggerNode" />
+
+        <spawnAreas>
+            <spawnArea useProductionStorage="false" defaultEnabled="true">
+                <name>$l10n_mySpawnArea</name>
+                <litersPerHour>1000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+
+                <area startNode="spawnArea1Start" widthNode="spawnArea1Width" heightNode="spawnArea1Height" />
+            </spawnArea>
+        </spawnAreas>
+    </materialSpawner>
+</placeable>
 ```
 
 | Name | Type | Required | Default | Description |
@@ -138,6 +185,38 @@ placeable.materialSpawner.spawnAreas.spawnArea(%).sounds.work2
 placeable.materialSpawner.spawnAreas.spawnArea(%).sounds.dropping
 ```
 
+(Optional)
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <activationTrigger node="playerControlPanelTriggerNode" />
+
+        <spawnAreas>
+            <spawnArea useProductionStorage="false" defaultEnabled="true">
+                <name>$l10n_mySpawnArea</name>
+                <litersPerHour>1000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+
+                <area startNode="spawnArea1Start" widthNode="spawnArea1Width" heightNode="spawnArea1Height" />
+
+                <sounds>
+                    <work file="sounds/workSound1.wav" linkNode="soundNode" loops="0" innerRadius="7" outerRadius="30" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work>
+                    <work2 file="sounds/workSound2.wav" linkNode="soundNode" loops="0" innerRadius="2" outerRadius="20" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work2>
+                    <dropping file="sounds/discharge.wav" linkNode="spawnPositionSoundNode" loops="0" innerRadius="2" outerRadius="25" supportsReverb="false" pitchScale="1.0">
+                        <volume indoor="0.5" outdoor="3.0" />
+                    </dropping>
+                </sounds>
+            </spawnArea>
+        </spawnAreas>
+    </materialSpawner>
+</placeable>
+```
 
 Uses the standard sample setup.
 
@@ -147,12 +226,90 @@ Uses the standard sample setup.
 placeable.materialSpawner.spawnAreas.spawnArea(%).effectNodes(%)
 ```
 
+(Optional)
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <activationTrigger node="playerControlPanelTriggerNode" />
+
+        <spawnAreas>
+            <spawnArea useProductionStorage="false" defaultEnabled="true">
+                <name>$l10n_mySpawnArea</name>
+                <litersPerHour>1000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+
+                <area startNode="spawnArea1Start" widthNode="spawnArea1Width" heightNode="spawnArea1Height" />
+
+                <sounds>
+                    <work file="sounds/workSound1.wav" linkNode="soundNode" loops="0" innerRadius="7" outerRadius="30" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work>
+                    <work2 file="sounds/workSound2.wav" linkNode="soundNode" loops="0" innerRadius="2" outerRadius="20" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work2>
+                    <dropping file="sounds/discharge.wav" linkNode="spawnPositionSoundNode" loops="0" innerRadius="2" outerRadius="25" supportsReverb="false" pitchScale="1.0">
+                        <volume indoor="0.5" outdoor="3.0" />
+                    </dropping>
+                </sounds>
+
+                <effectNodes>
+                    <effectNode effectNode="effectSmoke" materialType="unloadingSmoke" fadeTime="0.5" />
+                </effectNodes>
+            </spawnArea>
+        </spawnAreas>
+    </materialSpawner>
+</placeable>
+```
+
 Uses the standard effect nodes setup.
 
 ### Animation nodes
 
 ```
 placeable.materialSpawner.spawnAreas.spawnArea(%).animationNodes(%)
+```
+
+(Optional)
+
+```xml
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<placeable>
+    <materialSpawner>
+        <activationTrigger node="playerControlPanelTriggerNode" />
+
+        <spawnAreas>
+            <spawnArea useProductionStorage="false" defaultEnabled="true">
+                <name>$l10n_mySpawnArea</name>
+                <litersPerHour>1000</litersPerHour>
+                <fillTypes>STONE DIRT</fillTypes>
+
+                <area startNode="spawnArea1Start" widthNode="spawnArea1Width" heightNode="spawnArea1Height" />
+
+                <sounds>
+                    <work file="sounds/workSound1.wav" linkNode="soundNode" loops="0" innerRadius="7" outerRadius="30" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work>
+                    <work2 file="sounds/workSound2.wav" linkNode="soundNode" loops="0" innerRadius="2" outerRadius="20" supportsReverb="false">
+                        <volume indoor="0.3" outdoor="2" />
+                    </work2>
+                    <dropping file="sounds/discharge.wav" linkNode="spawnPositionSoundNode" loops="0" innerRadius="2" outerRadius="25" supportsReverb="false" pitchScale="1.0">
+                        <volume indoor="0.5" outdoor="3.0" />
+                    </dropping>
+                </sounds>
+
+                <effectNodes>
+                    <effectNode effectNode="effectSmoke" materialType="unloadingSmoke" fadeTime="0.5" />
+                </effectNodes>
+
+                <animationNodes>
+                    <animationNode class="ScrollingAnimation" node="belt" rotSpeed="-25" rotAxis="1" shaderComponentScale="-1 0 0 0" scrollSpeed="0.5" shaderParameterName="offsetUV" />
+                </animationNodes>
+            </spawnArea>
+        </spawnAreas>
+    </materialSpawner>
+</placeable>
 ```
 
 Uses the standard animation nodes setup.
