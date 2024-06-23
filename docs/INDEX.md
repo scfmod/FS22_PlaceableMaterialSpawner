@@ -223,7 +223,7 @@ Uses the standard sample setup.
 ### Effect nodes
 
 ```
-placeable.materialSpawner.spawnAreas.spawnArea(%).effectNodes(%)
+placeable.materialSpawner.spawnAreas.spawnArea(%).effectNodes.effectNode(%)
 ```
 
 (Optional)
@@ -268,7 +268,7 @@ Uses the standard effect nodes setup.
 ### Animation nodes
 
 ```
-placeable.materialSpawner.spawnAreas.spawnArea(%).animationNodes(%)
+placeable.materialSpawner.spawnAreas.spawnArea(%).animationNodes.animationNode(%)
 ```
 
 (Optional)
